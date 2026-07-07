@@ -30,6 +30,7 @@ router = APIRouter(
 )
 
 
+# Create a new task.
 @router.post(
     "/",
     response_model=TaskResponse,
@@ -42,6 +43,7 @@ def create_task(
     return create_new_task(db, task)
 
 
+# Get all tasks.
 @router.get(
     "/",
     response_model=List[TaskResponse]
@@ -52,6 +54,7 @@ def get_all_tasks(
     return get_tasks(db)
 
 
+# Get one task by its ID.
 @router.get(
     "/{task_id}",
     response_model=TaskResponse
@@ -62,6 +65,7 @@ def get_task_by_id(
 ):
     return get_task(db, task_id)
 
+# Update an existing task.
 @router.put(
     "/{task_id}",
     response_model=TaskResponse
@@ -73,6 +77,7 @@ def update_task_route(
 ):
     return update_existing_task(db, task_id, task)
 
+# Delete a task by its ID.
 @router.delete(
     "/{task_id}",
     status_code=status.HTTP_204_NO_CONTENT
@@ -83,6 +88,7 @@ def delete_task_route(
 ):
     delete_existing_task(db, task_id)
 
+# Mark a task as complete.
 @router.patch(
     "/{task_id}/complete",
     response_model=TaskResponse
@@ -94,6 +100,7 @@ def complete_task_route(
     return complete_task(db, task_id)
 
 
+# Search or filter tasks by keyword, status, or due date.
 @router.get(
     "/",
     response_model=List[TaskResponse]
